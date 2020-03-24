@@ -1,0 +1,70 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/colmr/vis_class/master/London2012Vega.csv",
+        "format": {
+            "type": "csv"
+        }
+    },
+    "transform": [
+        {
+            "filter": "datum.Weight > 0"
+        },
+        {
+            "filter": "datum.Height > 0"
+        },
+        {
+            "calculate": "datum.Weight / ( datum.Height / 100 * datum.Height / 100)",
+            "as": "BMI"
+        },
+        {
+            "filter": "datum.Sport == 'Swimming'"
+        }
+    ],
+    "spec": {
+        "mark": "point",
+        "encoding": {
+            "x": {
+                "field": {
+                    "repeat": "column"
+                },
+                "type": "quantitative",
+                "scale": {
+                    "zero": false
+                }
+            },
+            "y": {
+                "field": {
+                    "repeat": "row"
+                },
+                "type": "quantitative",
+                "scale": {
+                    "zero": false
+                }
+            },
+            "color": {
+                "field": "Sex",
+                "type": "nominal",
+                "scale": {
+                    "domain": [
+                        "F",
+                        "M"
+                    ],
+                    "scheme": "viridis"
+                }
+            }
+        }
+    },
+    "repeat": {
+        "row": [
+            "Weight",
+            "Height",
+            "BMI"
+        ],
+        "column": [
+            "Weight",
+            "Height",
+            "BMI"
+        ]
+    }
+}

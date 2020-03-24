@@ -1,0 +1,84 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/colmr/vis_class/master/London2012Vega.csv",
+        "format": {
+            "type": "csv"
+        }
+    },
+    "transform": [
+        {
+            "filter": "datum.Weight > 0"
+        },
+        {
+            "filter": "datum.Height > 0"
+        },
+        {
+            "filter": "datum.Sport == 'Swimming'"
+        }
+    ],
+    "vconcat": [
+        {
+            "mark": "bar",
+            "width": 500,
+            "height": 400,
+            "encoding": {
+                "x": {
+                    "field": "Weight",
+                    "type": "quantitative",
+                    "bin": {
+                        "maxbins": 20
+                    },
+                    "scale": {
+                        "domain": [
+                            40,
+                            110
+                        ]
+                    },
+                    "axis": null
+                },
+                "y": {
+                    "field": "Weight",
+                    "type": "quantitative",
+                    "aggregate": "count",
+                    "axis": {
+                        "title": "Number of Athletes"
+                    }
+                }
+            }
+        },
+        {
+            "mark": {
+                "type": "tick",
+                "tooltip": true
+            },
+            "width": 500,
+            "encoding": {
+                "x": {
+                    "field": "Weight",
+                    "type": "quantitative",
+                    "scale": {
+                        "domain": [
+                            40,
+                            110
+                        ]
+                    }
+                },
+                "tooltip": {
+                    "field": "Name",
+                    "type": "ordinal"
+                }
+            }
+        }
+    ],
+    "config": {
+        "concat": {
+            "spacing": 5
+        },
+        "axis": {
+            "labelFontSize": 18,
+            "titleFontSize": 18,
+            "titlePadding": 8
+        }
+    }
+}

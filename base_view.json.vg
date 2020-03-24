@@ -1,0 +1,29 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/colmr/vis_class/master/London2012Vega.csv",
+        "format": {
+            "type": "csv"
+        }
+    },
+    "transform": [
+        {
+            "filter": "datum.Weight > 0"
+        },
+        {
+            "filter": "datum.Height > 0"
+        }
+    ],
+    "mark": "bar",
+    "encoding": {
+        "y": {
+            "field": "Sport",
+            "type": "nominal"
+        },
+        "x": {
+            "field": "Height",
+            "type": "quantitative",
+            "aggregate": "mean"
+        }
+    }
+}
