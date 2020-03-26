@@ -1,14 +1,14 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
     "data": {
-        "url": "https://raw.githubusercontent.com/colmr/vis_class/master/London2012Vega.csv",
+        "url": "https://github.com/avidLearnerInProgress/infoviz-assignments/blob/master/make_model_data_16_cleaned.csv",
         "format": {
             "type": "csv"
         }
     },
     "transform": [
         {
-            "filter": "datum.Weight > 0"
+            "filter": "datum.VehicleMake > 0"
         },
         {
             "filter": "datum.Height > 0"
@@ -24,6 +24,10 @@
             "field": "Height",
             "type": "quantitative",
             "aggregate": "mean"
+        }
+        "color":{
+            "field": "VehicleModel",
+            "type" : "quantitative"
         }
     }
 }
