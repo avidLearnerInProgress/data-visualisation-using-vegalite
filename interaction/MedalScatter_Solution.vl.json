@@ -1,0 +1,72 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/colmr/vis_class/master/London2012Vega.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.Weight > 0"
+    },
+    {
+      "filter": "datum.Height > 0"
+    },
+    {
+      "filter": "datum.Total > 0"
+    }
+  ],
+  "repeat": {
+    "row": [
+      "Weight",
+      "Age",
+      "Height"
+    ],
+    "column": [
+      "Height",
+      "Age",
+      "Weight"
+    ]
+  },
+  "spec": {
+    "selection": {
+      "brush": {
+        "type": "interval",
+        "resolve": "global"
+      }
+    },
+    "mark": "point",
+    "encoding": {
+      "y": {
+        "field": {
+          "repeat": "row"
+        },
+        "type": "quantitative",
+        "scale": {
+          "zero": false
+        }
+      },
+      "x": {
+        "field": {
+          "repeat": "column"
+        },
+        "type": "quantitative",
+        "scale": {
+          "zero": false
+        }
+      },
+      "color": {
+        "condition": {
+          "selection": "brush",
+          "field": "Sex",
+          "type": "nominal",
+          "scale": {
+            "range": ["#8101FA", "#00C7A9"]
+          }
+        },
+        "value": "lightgrey"
+      }
+    }
+  }
+}

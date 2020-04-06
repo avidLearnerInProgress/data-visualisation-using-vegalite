@@ -1,0 +1,69 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/colmr/vis_class/master/London2012Vega.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "title": {
+    "text": "Olympic Athletes - Height vs Weight",
+    "anchor": "middle"
+  },
+  "width": 500,
+  "height": 500,
+  "transform": [
+    {
+      "filter": "datum.Weight > 0"
+    },
+    {
+      "filter": "datum.Height > 0"
+    }
+  ],
+  "selection": {
+    "spt": {
+      "type": "single",
+      "on":"click",
+      "fields": ["Sport"],
+      "bind": {"input": "select", "options": ["Archery", "Athletics", "Badminton", "Basketball", "Beach Volleyball", "Canoe Slalom", "Canoe Sprint", "Cycling - BMX", "Cycling - Mountain Bike", "Cycling - Road", "Cycling - Track", "Diving", "Equestrian", "Fencing", "Football", "Handball", "Hockey", "Judo", "Modern Pentathlon", "Rowing", "Sailing", "Shooting", "Swimming", "Table Tennis", "Tennis", "Triathlon", "Volleyball", "Water Polo", "Weightlifting", "Wrestling"]}
+    }
+  },
+  "mark": "circle",
+  "encoding": {
+    "y": {
+      "field": "Height",
+      "type": "quantitative",
+      "scale": {"domain": [120,240]}
+
+    },
+    "x": {
+      "field": "Weight",
+      "type": "quantitative",
+      "scale": {"domain": [30,220]}
+
+    },
+    "color": {
+        "condition": {
+            "selection": "spt",
+            "value":"red"
+            },
+        "value": "grey"  
+    },
+    "opacity": {
+        "condition": {
+            "selection": "spt",
+            "value":1
+            },
+        "value": 0.05
+    },
+    "tooltip": {
+      "field": "Name",
+      "type": "nominal"
+    }
+  },
+  "config": {
+    "legend": {
+      "orient": "bottom-right"
+    }
+  }
+}

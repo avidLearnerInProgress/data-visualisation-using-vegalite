@@ -1,0 +1,80 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+    "layer": [
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/colmr/vis_class/master/Ireland_custom_topjson.json",
+                "format": {
+                    "type": "topojson",
+                    "feature": "IRL_adm1"
+                }
+            },
+            "transform": [
+                {
+                    "lookup": "id",
+                    "from": {
+                        "data": {
+                            "url": "https://raw.githubusercontent.com/colmr/vis_class/master/IrishCountyPopulations.csv"
+                        },
+                        "key": "County",
+                        "fields": [
+                            "Population"
+                        ]
+                    }
+                }
+            ],
+            "height": 600,
+            "width": 600,
+            "projection": {
+                "type": "conicConformal"
+            },
+            "mark": {
+                "type": "geoshape",
+            },
+            "stroke": "black"
+            "encoding": {
+                "color": {
+                    "field": "Population",
+                    "type": "quantitative",
+                    "scale": {
+                        "scheme": "lightorange"
+                    },
+                    "legend": {
+                        "orient": "top-left",
+                        "direction": "horizontal"
+                    }
+                }
+            }
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/colmr/vis_class/master/Counties__OSi_National_Placenames_Gazetteer.csv",
+                "format": {
+                    "type": "csv"
+                }
+            },
+            "mark": {
+                "type": "text",
+                "dx": 12,
+                "fontStyle": "bold"
+            },
+            "encoding": {
+                "longitude": {
+                    "field": "X",
+                    "type": "quantitative"
+                },
+                "latitude": {
+                    "field": "Y",
+                    "type": "quantitative"
+                },
+                "text": {
+                    "field": "County",
+                    "type": "nominal"
+                },
+                "size": {
+                    "value": 12
+                }
+            }
+        }
+    ]
+}

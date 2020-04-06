@@ -1,0 +1,22 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/colmr/vis_class/master/StationDetails.csv"
+    },
+    "width": 500,
+    "height": 600,
+    "mark": "circle",
+    "projection": {
+        "type": "albers"
+    },
+    "encoding": {
+        "longitude": {
+            "field": "Longitude",
+            "type": "quantitative"
+        },
+        "latitude": {
+            "field": "Latitude",
+            "type": "quantitative"
+        }
+    }
+}

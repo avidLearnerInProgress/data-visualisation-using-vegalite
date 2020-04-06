@@ -1,0 +1,67 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+    "layer": [
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/colmr/vis_class/master/Ireland_custom_topjson.json",
+                "format": {
+                    "type": "topojson",
+                    "feature": "IRL_adm1"
+                }
+            },
+            "height": 600,
+            "width": 600,
+            "projection": {
+                "type": "conicConformal"
+            },
+            "mark": {
+                "type": "geoshape",
+                "fill": "lightgray",
+                "stroke": "white",
+                "strokeOpacity": 1
+            }
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/colmr/vis_class/master/Counties__OSi_National_Placenames_Gazetteer.csv",
+                "format": {
+                    "type": "csv"
+                }
+            },
+            "transform": [
+                {
+                    "lookup": "County",
+                    "from": {
+                        "data": {
+                            "url": "https://raw.githubusercontent.com/colmr/vis_class/master/IrishCountyPopulations.csv"
+                        },
+                        "key": "County",
+                        "fields": [
+                            "Population"
+                        ],
+
+                    }
+                }
+            ],
+            "mark": {
+                "type": "point",
+
+                "fillOpacity": 1,
+                "fill": "orange",
+                "stroke": "orange"
+                
+            },
+            "encoding": {
+                "longitude": {
+                    "field": "X",
+                    "type": "quantitative"
+                },
+                "latitude": {
+                    "field": "",
+                    "type": "quantitative"
+                },
+                "size": {"field": "Population", "type": "quantitative"}
+            }
+        }
+    ]
+}
